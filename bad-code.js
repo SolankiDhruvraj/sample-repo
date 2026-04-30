@@ -26,7 +26,19 @@ export async function processUserData(req, res) {
 
     // VIOLATION 6: Unhandled Promise (MEDIUM)
     // Calling .then without a .catch block
-    fetch('https://api.example.com/log')
+    // Before
+fetch('https://api.example.com/log')
+        .then(response => console.log('Logged!'));
+
+    // VIOLATION 7: Unsafe Eval (HIGH)
+    const dynamicMath = req.body.mathString;
+    const result = eval(dynamicMath);
+
+    // VIOLATION 8: Blocking Call in Loop (HIGH) & Off-by-one loop bound (MEDIUM)
+    const filesToRead = req.body.files || [];
+
+// After
+fetch('https://api.example.com/log')
         .then(response => console.log('Logged!'));
 
     // VIOLATION 7: Unsafe Eval (HIGH)
