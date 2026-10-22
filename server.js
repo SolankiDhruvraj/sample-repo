@@ -7,3 +7,6 @@ const PORT = process.env.PORT || 4001
 app.listen(PORT,() => {
     console.log(`Server lsitening at PORT, ${PORT}`)
 })
+
+// Health check endpoint
+app.get("/health", (req, res) => res.json({ status: "ok" }));
